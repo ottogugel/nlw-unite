@@ -1,0 +1,112 @@
+nlw unit
+como criar o app npx create-expo-app --template
+navigation (typescript)
+digita o nome do app
+digitar cd o nome da pasta criada e dar code . (para abrir no vs code)
+
+deletar pastas 
+- app / components / constants 
+
+dentro de assets apagar a pasta fonts
+
+pegar os arquivos que foram disponibilizados na aula sobre o assets e o src. (pagina da rocketseat)
+
+criar uma pasta src dentro da pasta criar uma pasta app e um arquivo chamado index.tsx
+configurar com view e text padrão.
+jogar as pastas que foram disponibilizadas dentro do src.
+
+para rodar o projeto dar npx expo start
+quando tiver cache npx expo start --clear
+
+configurando o nativewind
+npx expo install nativewind@^4.0.1 react-native-reanimated tailwindcss
+
+criar um arquivo tailwind.config.js
+e colocar /** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+trocar ./app para ./src (raiz - arquivo)
+remover js, jsx
+
+os arquivos colors e fontfamily que foram disponibilizados, importar dentro do arquivo tailwind.config.js
+import { colors } from './src/styles/colors'
+import { fontFamily } from "./src/styles/fontFamily";
+
+e configurar no extend 
+    extend: {
+      colors,
+      fontFamily,
+    },
+
+na pasta styles criar um global.css e jogar 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+dentro do babel.config.js colar o conteudo sdk 50+
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};
+
+criar um arquivo metro.config.js
+colar o conteudo sdk 50+
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname)
+
+module.exports = withNativeWind(config, { input: './global.css' })
+
+trocar ./global.css' para ./src/styles/global.css
+
+criar um arquivo _layout.tsx no app
+expo router (configuração das nossas rotas e pode ser utilizado para centralizar as configurações para compartilhar na aplicação.)
+
+criar a pasta types dentro do src para poder fazer a tipagem com classname=""
+criar o arquivo nativewind-env.d.ts e colar o conteudo
+/// <reference types="nativewind/types" />
+
+dentro do _layout
+criar slot e statusbar
+
+dentro do app.json troca resizemode para cover e remove backgroundcolor no spalsh e android em backgroundcolor para #F48F56
+
+instalando google fonts
+npx expo install expo-font @expo-google-fonts/roboto
+
+criar um componente de loading
+
+e fazer o if ternario {fontsLoaded ? <Slot /> : <Loading /> }
+
+ir no tsconfig.json dentro do paths colocar ["./src./*"] ja que estava ["./*"] para configurar a questão da importação flexivel
+
+* toda vez que for importar uma image do react-native colocar source={require("caminho da imagem aonde está e o fomrato dela.)}
+
+tipagem 1
+dentro da function Input colocar { children}: {children: ReactNode} 
+repassar na view para receber elementos filhos.
+
+tipagem 2
+importar TextInputProps colocar dentro da function Field {}: TextInputProps
+
+para não ter que ficar importando cada propriedade, basta colocar ...rest e ele vai puxar todas as propriedades.
+então passa dentro da function Field {...rest} e dentro da tag TextInput {...rest}
+
+# sempre no final, se não pode sobrepor a propriedade ...rest
+
+forma implicita = placeholder, outros.
+forma explicita = ...rest
+
