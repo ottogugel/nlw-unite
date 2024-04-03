@@ -1,7 +1,7 @@
 import { Input } from '@/components/Input';
 import { Button } from "@/components/Button";
 
-import { View, Image, StatusBar  } from 'react-native'
+import { View, Image, StatusBar, Alert  } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Link } from 'expo-router';
 
@@ -12,8 +12,11 @@ export default function Home() {
 
   const [code, setCode] = useState("")
 
+  // Validação do input de ticket
   function handleAccessCredential() {
-    console.warn(code)
+    if(!code.trim()){
+      return Alert.alert("Ticket", "Enter the ticket code");
+    }
   }
 
   return (

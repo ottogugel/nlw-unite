@@ -112,3 +112,8 @@ forma explicita = ...rest
 
 
 <> </> = fragment
+
+push no expo-router: Empurra sempre um nova rota e nunca abre ou substitui as rotas existentes. É possível enviar a rota atual várias vezes ou com novos parâmetros.
+
+Image x Imagebackground
+O imagebackground é possível colocar um conteudo com uma imagem de fundo.

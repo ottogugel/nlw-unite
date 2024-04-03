@@ -1,4 +1,10 @@
-Texto que vai informar o que significa esse projeto...
+<h1 align="center">
+  <img width="100%" alt="Banner" title="App" src="app.png" />
+</h1>
+
+### Sobre o projeto
+
+O pass.in é uma aplicação de gestão de participantes em eventos presenciais. A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição. Os participantes inscritos podem emitir uma credencial para check-in no dia do evento. O sistema fará um scan da credencial do participante para permitir a entrada no evento.
 
 ## :rocket: Tecnologias
 
