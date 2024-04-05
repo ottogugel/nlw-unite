@@ -15,11 +15,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Nativewind](https://www.nativewind.dev/v4/getting-started/expo-router)
 - [TypeScript](https://www.nativewind.dev/v4/getting-started/typescript)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [JSON Server]()
-- [TanStack React Query]()
-- [React Hook Form]()
-- [ZOD]()
-- [HookForm/Resolvers]()
+- [React Native QRCode SVG](https://www.npmjs.com/package/react-native-qrcode-svg)
+- [React Native SVG](https://github.com/software-mansion/react-native-svg)
+- [Expo Image Picker](https://docs.expo.dev/versions/latest/sdk/imagepicker/)
 
 ## :computer: Projeto
 

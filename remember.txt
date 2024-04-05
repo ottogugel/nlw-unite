@@ -117,3 +117,13 @@ push no expo-router: Empurra sempre um nova rota e nunca abre ou substitui as ro
 
 Image x Imagebackground
 O imagebackground é possível colocar um conteudo com uma imagem de fundo.
+
+Instalar expo image picker
+npx expo install expo-image-picker
+
+() => void não retorna nada.
+
+atualmente o nativewind não estava estilizando o touchableopacity devido a versão, então é necessario rodar npx expo install nativewind@4.0.36 para corrigir
+
+instalar react-native-svg e react-native-qrcode-svg
+npx expo install react-native-svg react-native-qrcode-svg
