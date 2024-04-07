@@ -127,3 +127,27 @@ atualmente o nativewind não estava estilizando o touchableopacity devido a vers
 
 instalar react-native-svg e react-native-qrcode-svg
 npx expo install react-native-svg react-native-qrcode-svg
+
+# Integração com back-end
+Pegar a pasta do server que foi feito na trilha node.
+
+instalar o axios
+npm i axios
+
+criar uma pasta server e dentro da pasta colocar api.ts
+dentro do arquivo configurar como
+import axios from 'axios';
+
+export const api = axios.create({
+  baseURL: "http://192.168.15.8:3333",
+})
+
+lembrando que a porta é o que está no back-end e o ip é o que expo disponibiliza assim que roda o aplicativo.
+
+toda função que for promise tem que colocar async e await.
+
+instalar o asyncstorage (armazenamento em chave e valor)
+npx expo install @react-native-async-storage/async-storage
+
+instalar o zustand (gerenciar os estados globais em nossa aplicação em forma simples)
+npm install zustand

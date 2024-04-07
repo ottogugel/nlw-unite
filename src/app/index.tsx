@@ -5,17 +5,31 @@ import { View, Image, StatusBar, Alert  } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Link } from 'expo-router';
 
+import { api } from '@/server/api';
+
 import { colors } from '@/styles/colors';
 import { useState } from 'react';
 
 export default function Home() {
 
   const [code, setCode] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   // Validação do input de ticket
-  function handleAccessCredential() {
+  async function handleAccessCredential() {
+    try {
     if(!code.trim()){
-      return Alert.alert("Ticket", "Enter the ticket code");
+      return Alert.alert("Ticket", "Enter the ticket code!");
+    }
+
+    setIsLoading(true)
+
+    const { data } = await api.get(`/attendees/${code}/badge`)
+
+    } catch(error) {
+      console.log(error)
+      setIsLoading(false)
+      Alert.alert("Ticket", "Ticket not found!");
     }
   }
 

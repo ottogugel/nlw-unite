@@ -18,6 +18,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React Native QRCode SVG](https://www.npmjs.com/package/react-native-qrcode-svg)
 - [React Native SVG](https://github.com/software-mansion/react-native-svg)
 - [Expo Image Picker](https://docs.expo.dev/versions/latest/sdk/imagepicker/)
+- [Axios](https://axios-http.com/ptbr/docs/intro)
+- [Expo AsyncStorage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
+- [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
 
 ## :computer: Projeto
 
