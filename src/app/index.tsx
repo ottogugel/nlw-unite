@@ -3,9 +3,10 @@ import { Button } from "@/components/Button";
 
 import { View, Image, StatusBar, Alert  } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { Link } from 'expo-router';
+import { Link, Redirect } from 'expo-router';
 
 import { api } from '@/server/api';
+import { useBadgeStore } from '@/store/badge-store'
 
 import { colors } from '@/styles/colors';
 import { useState } from 'react';
@@ -14,6 +15,8 @@ export default function Home() {
 
   const [code, setCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
+  const badgeStore = useBadgeStore()
 
   // Validação do input de ticket
   async function handleAccessCredential() {
@@ -25,12 +28,17 @@ export default function Home() {
     setIsLoading(true)
 
     const { data } = await api.get(`/attendees/${code}/badge`)
-
+    badgeStore.save(data.badge)
     } catch(error) {
       console.log(error)
       setIsLoading(false)
       Alert.alert("Ticket", "Ticket not found!");
     }
+  }
+
+  // Verificar o código da credencial e redirecionar p/ o ticket.
+  if (badgeStore.data?.checkInURL) {
+    return <Redirect href="/ticket" />
   }
 
   return (
@@ -51,7 +59,7 @@ export default function Home() {
           <Input.Field placeholder="Ticket code" onChangeText={setCode} />
         </Input>
 
-        <Button title="Access Credential" onPress={handleAccessCredential} />
+        <Button title="Access Credential" onPress={handleAccessCredential} isLoading={isLoading} />
 
         <Link
           href="/register"

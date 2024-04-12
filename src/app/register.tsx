@@ -2,6 +2,7 @@ import { Input } from '@/components/Input';
 import { Button } from "@/components/Button";
 
 import { api } from '@/server/api';
+import { useBadgeStore } from '@/store/badge-store';
 
 import { View, Image, StatusBar, Alert  } from 'react-native'
 import { MaterialIcons, FontAwesome6 } from '@expo/vector-icons'
@@ -17,6 +18,8 @@ export default function Register() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false)
+
+  const badgeStorage = useBadgeStore();
 
   // Validação do input de nome e email
   async function handleRegister() {
@@ -34,6 +37,13 @@ export default function Register() {
     const registerResponse = await api.post(`/events/${EVENT_ID}/attendees`, { name, email })
 
     if(registerResponse.data.attendeeId) {
+
+      const badgeResponse = await api.get(
+        `/attendees/${registerResponse.data.attendeeId}/badge`
+      );
+
+      badgeStorage.save(badgeResponse.data.badge) // Informações da credenciais sendo salvas após fazer o cadastro.
+
       Alert.alert("Registration", "Registration successful", [
         { text: "OK", onPress: () => router.push("/ticket") },
       ]);

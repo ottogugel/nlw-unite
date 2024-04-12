@@ -151,3 +151,7 @@ npx expo install @react-native-async-storage/async-storage
 
 instalar o zustand (gerenciar os estados globais em nossa aplicação em forma simples)
 npm install zustand
+
+useState - um hook para lidar com estadoas
+
+criar o proprio hook armazenar a credencial do usuario como global como persistir no dispositivo.

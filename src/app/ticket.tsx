@@ -11,6 +11,8 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker'
 
+import { useBadgeStore } from '@/store/badge-store'
+
 import { Credential } from "@/components/Credential";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
@@ -18,10 +20,13 @@ import { Button } from "@/components/Button";
 import { colors } from "@/styles/colors";
 import { useState } from "react";
 import { QrCode } from "@/components/QrCode";
+import { Redirect } from "expo-router";
 
 export default function Ticket() {
   const [image, setImage] = useState("")
   const [expandQRCode, setExpandQRCode] = useState(false)
+
+  const badgeStorage = useBadgeStore()
 
   async function handleSelectImage() {
     try {
@@ -41,6 +46,10 @@ export default function Ticket() {
     }
   }
 
+  if (!badgeStorage.data?.checkInURL) {
+    return <Redirect href="/" />
+  }
+
   return (
     <View className="flex-1 bg-green-500">
       <StatusBar barStyle="light-content" />
@@ -51,7 +60,11 @@ export default function Ticket() {
         contentContainerClassName="px-8 pb-8"
         showsVerticalScrollIndicator={false}
       >
-        <Credential image={image} onChangeAvatar={handleSelectImage} onExpandQRCode={() => setExpandQRCode(true)} />
+        <Credential
+          image={image}
+          onChangeAvatar={handleSelectImage}
+          onExpandQRCode={() => setExpandQRCode(true)}
+        />
 
         <FontAwesome
           name="angle-double-down"
@@ -70,7 +83,11 @@ export default function Ticket() {
 
         <Button title="Share" />
 
-        <TouchableOpacity activeOpacity={0.7} className="mt-10">
+        <TouchableOpacity
+          activeOpacity={0.7}
+          className="mt-10"
+          onPress={() => badgeStorage.remove()}
+        >
           <Text className="text-base text-white font-bold text-center">
             Remove Ticket
           </Text>
@@ -79,7 +96,10 @@ export default function Ticket() {
 
       <Modal visible={expandQRCode} statusBarTranslucent animationType="fade">
         <View className="flex-1 bg-green-500 items-center justify-center">
-          <TouchableOpacity activeOpacity={0.7} onPress={() => setExpandQRCode(false)}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => setExpandQRCode(false)}
+          >
             <QrCode value="teste" size={300} />
             <Text className="font-body text-orange-500 text-sm mt-10 text-center ">
               Close QRCode
